@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="card card-body">
+            <form method="post" action="/addWork">
+                {{ forms.title }}<br>
+                {{ forms.context }}<br>
+                {{ forms.submit }}<br>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
