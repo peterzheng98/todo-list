@@ -11,17 +11,17 @@ overall_list = []
 def disp_detail(ident):
     sublist = overall_list[ident]
     return render_template('detail.html',
-                           table_content=[('Title', sublist[0]), ('Context', sublist[1]), ('Add Time', sublist[2])],
+                           table_content=[('Title', sublist[0]), ('Context', sublist[1]), ('Add Time', sublist[2]), ('Finish', sublist[3])],
                            overall_id=ident)
 
 
 @app.route('/')
 def hello_world():
-    header_content = ['#', 'Title', 'Context', 'AddTime', 'Detail']
+    header_content = ['#', 'Title', 'Context', 'AddTime', 'Finished?', 'Detail']
     table_content = []
     for idx, d in enumerate(overall_list):
         table_content.append(
-            [('', '{}'.format(idx)), ('', d[0]), ('', d[1]), ('', d[2]), ('/detail/{}'.format(idx), 'Go>')])
+            [('', '{}'.format(idx)), ('', d[0]), ('', d[1]), ('', d[2]), ('', 'No' if not d[3] else 'Yes'), ('/detail/{}'.format(idx), 'Go>')])
     return render_template('index.html',
                            day_string=time.strftime('%Y-%m-%d', time.localtime(time.time())),
                            table_header=header_content,
@@ -38,7 +38,7 @@ def addWork():
         title = request.form.get('title')
         context = request.form.get('context')
         addTime = time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time()))
-        overall_list.append((title, context, addTime))
+        overall_list.append((title, context, addTime, False))
         return redirect('/')
 
 
