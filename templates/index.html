@@ -17,16 +17,18 @@
                 {% for rows in table_content %}
                     <tr>
                         {% for col in rows %}
-                            <div class="custom-small-font">
-                                {% if col[1] != '' %}
-                                    <a href="{{ col[1] }}">
-                                {% endif %}
-                                {{ col[0] }}
-                                {% if col[1] != '' %}
-                                    </a>
-                                {% endif %}
+                            <td>
+                                <div class="custom-small-font">
+                                    {% if col[0] != '' %}
+                                        <a href="{{ col[0] }}">
+                                    {% endif %}
+                                    {{ col[1] }}
+                                    {% if col[0] != '' %}
+                                        </a>
+                                    {% endif %}
 
-                            </div>
+                                </div>
+                            </td>
                         {% endfor %}
                     </tr>
                 {% endfor %}

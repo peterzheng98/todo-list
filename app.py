@@ -9,8 +9,14 @@ overall_list = []
 
 @app.route('/')
 def hello_world():
+    header_content = ['#', 'Title', 'Context', 'AddTime', 'Detail']
+    table_content = []
+    for idx, d in enumerate(overall_list):
+        table_content.append([('', '{}'.format(idx)), ('', d[0]), ('', d[1]), ('', d[2]), ('/detail/{}'.format(idx), 'Go>')])
     return render_template('index.html',
-                           day_string=time.strftime('%Y-%m-%d', time.localtime(time.time()))
+                           day_string=time.strftime('%Y-%m-%d', time.localtime(time.time())),
+                           table_header=header_content,
+                           table_content=table_content
                            )
 
 

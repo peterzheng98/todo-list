@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="card card-body">
+            <h2>Detail message for Record #{{ overall_id }}</h2>
+            <table class="table table-striped">
+                <tbody>
+                {% for rows in table_content %}
+                    <tr>
+                        <td>rows[0]</td>
+                        <td>rows[1]</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div align="right">
+                            <button type="button" class="btn btn-sm btn-primary"
+                                    onclick="location.href='/'">Go Back
+                            </button>
+                        </div>
+        </div>
+    </div>
+
+{% endblock %}
