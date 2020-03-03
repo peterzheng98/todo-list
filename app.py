@@ -1,10 +1,25 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 from mainForms import addWorkForm
 import time
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = 'pikachu-loves-watermelon'
 overall_list = []
+
+
+
+@app.route('/modified/t/<int:ident>')
+def modified_to_true(ident):
+    overall_list[ident][3] = True
+    flash('You finish work {}!'.format(overall_list[ident][0]))
+    return redirect('/detail/{}'.format(ident))
+
+
+@app.route('/modified/f/<int:ident>')
+def modified_to_false(ident):
+    overall_list[ident][3] = False
+    flash('Go on work {}!'.format(overall_list[ident][0]))
+    return redirect('/detail/{}'.format(ident))
 
 
 @app.route('/detail/<int:ident>')
@@ -38,7 +53,8 @@ def addWork():
         title = request.form.get('title')
         context = request.form.get('context')
         addTime = time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time()))
-        overall_list.append((title, context, addTime, False))
+        overall_list.append([title, context, addTime, False])
+        flash('Add work {}!'.format(title))
         return redirect('/')
 
 
