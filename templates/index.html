@@ -4,7 +4,34 @@
 
     <div class="container">
         <div class="card card-body">
+            <h1>Hello. It's {{ day_string }} today.</h1>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    {% for row in table_header %}
+                        <th>{{ row }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for rows in table_content %}
+                    <tr>
+                        {% for col in rows %}
+                            <div class="custom-small-font">
+                                {% if col[1] != '' %}
+                                    <a href="{{ col[1] }}">
+                                {% endif %}
+                                {{ col[0] }}
+                                {% if col[1] != '' %}
+                                    </a>
+                                {% endif %}
 
+                            </div>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 
